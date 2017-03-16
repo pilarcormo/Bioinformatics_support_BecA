@@ -7,8 +7,8 @@ module load cufflinks/2.2.1
 
 sample=$1
 
-FA='genome/Danio_rerio.GRCz10.dna.toplevel.fa'
-GFF='genome/Danio_rerio.GRCz10.87.gtf'
+FA='genome/*.fa'
+GFF='genome/*.gtf'
 OUT="$sample/cufflinks/"
 
 #####################

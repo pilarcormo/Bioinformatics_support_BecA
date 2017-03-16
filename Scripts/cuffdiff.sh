@@ -5,8 +5,8 @@
 module load cufflinks/2.2.1
 
 
-FA='genome/Danio_rerio.GRCz10.dna.toplevel.fa'
-GFF='genome/Danio_rerio.GRCz10.87.gtf'
+FA='genome/*.fa'
+GFF='genome/*.gtf'
 
 mkdir cuffdiff
 
@@ -14,7 +14,7 @@ mkdir cuffdiff
 ###STEP 2 - cuffmerge
 ######################
 
-ls */$OUT/transcripts.gtf > cuffdiff/assemblies.txt
+ls */cufflinks/transcripts.gtf > cuffdiff/assemblies.txt
 cuffmerge -s $FA -g $GFF -o cuffdiff/merged_asm cuffdiff/assemblies.txt
 
 ######################
