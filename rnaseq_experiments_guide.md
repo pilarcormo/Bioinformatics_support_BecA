@@ -1,4 +1,4 @@
-#RNAseq experiments
+# RNAseq experiments
 
 To analyse expression from RNA-Seq data the steps are the following:
 
@@ -11,9 +11,9 @@ To analyse expression from RNA-Seq data the steps are the following:
 
 ![image](workflow.png)
 
-##1.Quality control and filtering
+## 1.Quality control and filtering
 
-###FastQC
+### FastQC
 FastQC looks at different quality parameters in the reads and generates a html output that can be oppened in the browser. 
 
 Usage:
@@ -23,7 +23,7 @@ fastqc <reads1.fastq>
 fastqc <reads2.fastq>
 ```
 
-###Trimmomatic
+### Trimmomatic
 
 Trimmomatic includes a variety of processing steps for read trimming and filtering, also identification of adapter sequences and quality filtering. 
 
@@ -44,19 +44,19 @@ ILLUMINACLIP:TruSeq-PE.fa:1:20:10
 TruSeq-PE.fa is a fasta file containing the sequences for the sequencing adaptors to clip. 
 
 
-##2. Alignment 
+## 2. Alignment 
 
 There are numerous tools performing short read alignment and the choice of aligner should be carefully made according to the analysis goals/requirements. Here we will use Tophat, a widely used ultrafast aligner that performs spliced alignments. Tophat is based on Bowtie (a splice-unaware aligner) to perform alignments and uses an indexed genome to keep its memory footprint small and the running time short.
 
 To produce the alignments a programme specifically designed for RNAseq should be used.  The alignment should be done independently for each of the samples. 
 
-###Index reference
+### Index reference
 
 ```
 bowtie2-build <reference.fa> <index_ref>
 ```
 
-###Tophat 2
+### Tophat 2
 
 Tophat is the aligner of the tuxedo suite for RNA-Seq analysis. The aligner maps to the reference and can be guided with the annotation. Tophat requires to have a constructed Bowtie2 index in order to do the alignments. 
 
@@ -78,17 +78,17 @@ Options (there are more)
 ``-o``  - this specifies in which subdirectory *Tophat* should save the output files. Given that for every run the name of the output files is the same, we specify different folders for each run.
 
 
-##3. Expression analysis
+## 3. Expression analysis
 
 To quantify the differences in the expression levels on the different gens we used to different packages: cufflinks and HTSeq/DeSeq2. Cufflinks re-annotates the genome and gives a list of expression differences by gene and isoform, HTSeq provides the raw counts of genes per sample and DeSeq2 estimates the expression difference. 
 
-###Cufflinks/Cuffdiff
+### Cufflinks/Cuffdiff
 To analyse the differential expression with cufflinks and cuffdiff two mayor steps are carried on: Transcriptome assembly and differential expression quantification. 
 
 
-####Transcriptome assembly
+#### Transcriptome assembly
 
-#####1. Cufflinks
+##### 1. Cufflinks
 
 As a first stage, the mapped reads are compared to the annotated genes and the reads that aren't mapped to obtain novel isoforms and a new transcriptome (GTF/GFF file). The process is done on each of the samples. 
 
@@ -111,7 +111,7 @@ The output folder for each of the samples contain the following files:
 - `skipped.gtf`  Genes that are not used in the downstream analysis 
 - `transcripts.gtf` The resulting transcript for the sample
 
-#####2. Cuffmerge 
+##### 2. Cuffmerge 
 
 The next step is to call for a consensus GTF file from `transcripts.gtf`: 
 
@@ -126,7 +126,7 @@ The relevant parameters are:
 - `-g` The GTF file 
 - `-o <out>/merged_asm` The new assembly
 
-#####3. Cuffdiff
+##### 3. Cuffdiff
 
 Finally, the differential gene expression is calculated using `cuffdiff`. For this, we need to get the list of all the alignment files (BAM files). 
 
@@ -148,7 +148,7 @@ The output will be found in the output folder previously specified and created (
 
 More information about cuffdiff output files can be found [here](http://cole-trapnell-lab.github.io/cufflinks/cuffdiff/#cuffdiff-output-files)
 
-###HtSeq
+### HtSeq
 
 An alternative way to look calculate the differential expression is to count how many times a read hits a gene and take the number of counts directly, regardless of the size of the gene, as opposed to normalising to the total number of bases on each gene (fpkmm). HTSeq works with paired reads sorted by name. 
 
