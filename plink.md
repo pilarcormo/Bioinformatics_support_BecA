@@ -1,4 +1,4 @@
-###1. Obtain .map and .ped for PLINK 1.9 
+### 1. Obtain .map and .ped for PLINK 1.9 
 
 1) Fix truncated columns
 
@@ -11,12 +11,12 @@
 5) Fix duplicate genotypes names by add .1 to the repeated ones. 
 
 
-###2. Create phenotype file
+### 2. Create phenotype file
 
 - Include phenotype : FID has to match between external phenotype file and ped file (0 for all of them works)
 
 
-###3. Filtering 
+### 3. Filtering 
 
 Remove bad SNPs and individuals. Change the following numbers for a more or less restrictive filtering. 
 
@@ -26,7 +26,7 @@ Remove bad SNPs and individuals. Change the following numbers for a more or less
 
 - Remove SNPs that have less < 90% genotype call rate or >10% genotype error rate (--geno 0.1). In order words, remove loci (SNPs) that do not have at least 90% of data from all the individuals.    ```
 plink --bfile data --pheno pheno.txt --allow-no-sex --mind 0.05 --geno 0.1 --maf 0.05 --hwe 0.001 --out qc_fb_phe --make-bed --recode
-```###4. Association study
+```### 4. Association study
 
 ```plink --bfile data -–assoc --allow-no-sex```
 It will only take the first column of phenotypic data (Dmg_Rating)In R:

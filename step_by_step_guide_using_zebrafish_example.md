@@ -1,4 +1,4 @@
-###Step by step guide using Zebrafish example 
+### Step by step guide using Zebrafish example 
 
 Example data from [EBI training course](https://www.ebi.ac.uk/training/online/course/ebi-next-generation-sequencing-practical-course/rna-sequencing/rna-seq-analysis-transcriptome)
 
@@ -117,7 +117,7 @@ Example data from [EBI training course](https://www.ebi.ac.uk/training/online/co
 	``sbatch cuffdiff.sh``
 
 
-###Useful commands to remember
+### Useful commands to remember
 
 ``sacct`` -  to check if job is running/failed/completed
 
