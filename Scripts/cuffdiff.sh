@@ -21,4 +21,4 @@ cuffmerge -s $FA -g $GFF -o cuffdiff/merged_asm cuffdiff/assemblies.txt
 ###STEP 3 - cuffdifff
 ######################
 
-cuffdiff -L 2cells, 6h  -o cuffdiff cuffdiff/merged.gtf 2_cells/2_cells.bam 6h/6h.bam
+cuffdiff -L 2cells, 6h  -o cuffdiff cuffdiff/merged_asm/merged.gtf 2_cells/2_cells.bam 6h/6h.bam

@@ -39,7 +39,6 @@ Example data from [EBI training course](https://www.ebi.ac.uk/training/online/co
 	6h cufflinks.sh genome index_reference.sh top_hat.sh
 	```
 
-
 6. Create directory for genome and move files inside 
 
 	``mkdir genome``
@@ -96,15 +95,17 @@ Example data from [EBI training course](https://www.ebi.ac.uk/training/online/co
 
 	``sbatch htseq.sh 6h``
 
-14. Make joined htseq file and  and separate
+14. Move htseq files to common file and make joined htseq file and  and separate
 
-	``join 2_cells/2_cells.htseq.txt 6h/6h.htseq.txt > merge_htseq.txt``
+	```mkdir htseq```	```mv 2_cells/*.htseq.txt htseq```	```mv 6h/*.htseq.txt htseq```
+
+	``join 2_cells/2_cells.htseq.txt 6h/6h.htseq.txt > zebrafish_htseq.txt``
 
 15. Add names of samples to htseq file 	
-	``sed -i '1s/^/genes 2_cells 6h \n/' merge_htseq.txt``
+	``sed -i '1s/^/genes 2_cells 6h \n/' zebrafish_htseq.txt``
 
 16. Separate columns by tabs
-	``tr ' ' '\t' < merge_htseq.txt > merge_htseq_tab.txt``
+	``tr ' ' '\t' < zebrafish_htseq.txt > zebrafish_htseq_tab.txt``
 
 14. **OR** run Cufflinks to quantify transcripts
 

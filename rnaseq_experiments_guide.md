@@ -174,7 +174,9 @@ Now, **merge all the htseq.txt** files into a tab file:
 
 2. Add the names of the libraries at the top of the htseq file 
 
-```sed -i '1s/^/genes	<1>	<2> /n /' merge_htseq.txt```
+```sed -i '1s/^/genes	<1>	<2> \n /' merge_htseq.txt```
+
+where <1> and <2> are the names of the samples in the columns 
 
 3. After using join, the fields are separated by spaces and not by tabs, so we have to replace spaces by tabs using:
 
