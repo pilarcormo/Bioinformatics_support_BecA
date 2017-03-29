@@ -84,7 +84,7 @@
 	heatmap.2(sampleDistMatrix, trace="none", col=colours)
 	```
 	
-	10.  Take 50 first DE genes and make heatmap 
+10.  Take 50 first DE genes and make heatmap 
 	
 	```
 	select <-head(order(rowMeans(counts(dds,normalized=FALSE)),decreasing=TRUE), 50	)
