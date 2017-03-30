@@ -90,9 +90,6 @@
 	nt <- normTransform(dds) # defaults to log2(x+1)
 	log2.norm.counts <- assay(nt)[select,]
 	df <- as.data.frame(colData(dds)[,c("condition")])
-	```
-	
-	```
 	p <-pheatmap(assay(rld)[select,], cluster_rows=FALSE, 	show_rownames=TRUE,cluster_cols=FALSE, annotation_col=df)
 	```
 	
