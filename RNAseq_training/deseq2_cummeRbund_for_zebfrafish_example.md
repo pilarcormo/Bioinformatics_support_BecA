@@ -86,7 +86,7 @@
 10.  Take 50 first DE genes and make heatmap 
 	
 	```
-	select <-head(order(rowMeans(counts(dds,normalized=FALSE)),decreasing=TRUE), 50	)
+	select <-head(order(rowMeans(counts(dds,normalized=FALSE)),decreasing=TRUE), 50)
 	nt <- normTransform(dds) # defaults to log2(x+1)
 	log2.norm.counts <- assay(nt)[select,]
 	df <- as.data.frame(colData(dds)[,c("condition")])
