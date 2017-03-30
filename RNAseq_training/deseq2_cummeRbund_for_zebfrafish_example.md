@@ -47,7 +47,6 @@
 	dds<-DESeqDataSetFromMatrix(countData=localTable,colData,formula(~condition))
 	dds <- DESeq(dds)
 	rld <- rlog(dds)
-	
 	```
 6. Plot MA to check distribution of differentially expressed genes 
 	
@@ -92,6 +91,7 @@
 	log2.norm.counts <- assay(nt)[select,]
 	df <- as.data.frame(colData(dds)[,c("condition")])
 	```
+	
 	```
 	p <-pheatmap(assay(rld)[select,], cluster_rows=FALSE, 	show_rownames=TRUE,cluster_cols=FALSE, annotation_col=df)
 	```
