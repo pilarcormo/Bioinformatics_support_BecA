@@ -1,15 +1,18 @@
-### DESeq2 for Zebfrafish example 
+### DESeq2 for Zebrafish example 
 
 1. Install Deseq2 and other libraries 
 
 	```
 	source("https://bioconductor.org/biocLite.R")
 	biocLite("DESeq2")
+	install.packages("DESeq2")
 	library(DESeq2)
 	library("gplots")
 	library("RColorBrewer")
 	library(pheatmap)
 	```
+Note:	
+If the code about does not work, and you get an error saying that package ‘xxx’ is not available (for R version x.y.z), try solution at []()
 
 1. Set working directory 
  
