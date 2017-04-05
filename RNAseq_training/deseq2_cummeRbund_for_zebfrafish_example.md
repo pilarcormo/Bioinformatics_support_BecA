@@ -12,7 +12,7 @@
 	library(pheatmap)
 	```
 Note:	
-If the code about does not work, and you get an error saying that package ‘xxx’ is not available (for R version x.y.z), try solution at []()
+If the code about does not work, and you get an error saying that package ‘xxx’ is not available (for R version x.y.z), try solution at [sourceDic.R](https://github.com/pilarcormo/Bioinformatics_support_BecA/blob/master/R-scripts/sourceDic.R)
 
 1. Set working directory 
  
@@ -123,8 +123,12 @@ If the code about does not work, and you get an error saying that package ‘xxx
 	```
 	source("https://bioconductor.org/biocLite.R")
 	biocLite("cummeRbund")
+	install.packages("cummeRbund")
 	library(cummeRbund)
 	```
+Note:	
+If the code about does not work, and you get an error saying that package ‘xxx’ is not available (for R version x.y.z), try solution at [sourceDic.R](https://github.com/pilarcormo/Bioinformatics_support_BecA/blob/master/R-scripts/sourceDic.R)	
+	
 2. Import data and create a database out of cuffdiff output files
 
 	```
