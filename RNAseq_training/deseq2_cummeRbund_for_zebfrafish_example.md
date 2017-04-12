@@ -5,14 +5,11 @@
 	```
 	source("https://bioconductor.org/biocLite.R")
 	biocLite("DESeq2")
-	install.packages("DESeq2")
 	library(DESeq2)
 	library("gplots")
 	library("RColorBrewer")
 	library(pheatmap)
 	```
-Note:	
-If the code about does not work, and you get an error saying that package ‘xxx’ is not available (for R version x.y.z), try solution at [sourceDic.R](https://github.com/pilarcormo/Bioinformatics_support_BecA/blob/master/R-scripts/sourceDic.R)
 
 1. Set working directory 
  
@@ -50,6 +47,7 @@ If the code about does not work, and you get an error saying that package ‘xxx
 	dds<-DESeqDataSetFromMatrix(countData=localTable,colData,formula(~condition))
 	dds <- DESeq(dds)
 	rld <- rlog(dds)
+	
 	```
 6. Plot MA to check distribution of differentially expressed genes 
 	
@@ -74,7 +72,7 @@ If the code about does not work, and you get an error saying that package ‘xxx
 	res <- results(dds)
 	res_filtered <- subset(res, res$padj < 0.05)
 	resOrdered <- res_filtered[order(res_filtered$padj),]
-	write.csv(as.data.frame(resOrdered),file=paste("results_listeria", ".csv", 	sep=""))
+	write.csv(as.data.frame(resOrdered),file=paste("results_zebrafish", ".csv", 	sep=""))
 	```
 	
 9. Make heatmap for sample distance
@@ -86,24 +84,27 @@ If the code about does not work, and you get an error saying that package ‘xxx
 	heatmap.2(sampleDistMatrix, trace="none", col=colours)
 	```
 	
-10.  Take 50 first DE genes and make heatmap 
-
+10. Take 50 first DE genes and make heatmap 
+	
 	```
-	select <-head(order(rowMeans(counts(dds,normalized=FALSE)),decreasing=TRUE), 50)
+	select <-head(order(rowMeans(counts(dds,normalized=FALSE)),decreasing=TRUE), 50	)
 	nt <- normTransform(dds) # defaults to log2(x+1)
 	log2.norm.counts <- assay(nt)[select,]
-	df <- as.data.frame(colData(dds)[,c("condition")])
-	p <-pheatmap(assay(rld)[select,], cluster_rows=FALSE, show_rownames=TRUE,cluster_cols=FALSE, annotation_col=df)
+	```
+		
+	```
+	p <-pheatmap(assay(rld)[select,], cluster_rows=FALSE, 	show_rownames=TRUE,cluster_cols=FALSE,)
 	```
 	
 11. Differential expression - Pairwise comparision 
 	
 	```
-	2cells <- c("2cells")
-	6h <- c("6h")
+	x2cells <- c("2cells")
+	x6h <- c("6h")
 	```
+	
 	```
-	localTable<-countsTable[,c(2cells,6h)]
+	localTable<-countsTable[,c(x2cells,x6h)]
 	localCond<-c(rep("2cells", 1), rep("6h", 1))
 	colData<-data.frame(condition=factor(localCond))
 	dds<-DESeqDataSetFromMatrix(countData=localTable,colData,formula(~condition))
@@ -123,12 +124,8 @@ If the code about does not work, and you get an error saying that package ‘xxx
 	```
 	source("https://bioconductor.org/biocLite.R")
 	biocLite("cummeRbund")
-	install.packages("cummeRbund")
 	library(cummeRbund)
 	```
-Note:	
-If the code about does not work, and you get an error saying that package ‘xxx’ is not available (for R version x.y.z), try solution at [sourceDic.R](https://github.com/pilarcormo/Bioinformatics_support_BecA/blob/master/R-scripts/sourceDic.R)	
-	
 2. Import data and create a database out of cuffdiff output files
 
 	```

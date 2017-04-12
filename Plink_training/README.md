@@ -29,8 +29,84 @@ plink --bfile data --pheno pheno.txt --allow-no-sex --mind 0.05 --geno 0.1 --maf
 ```### 4. Association study
 
 ```plink --bfile data -–assoc --allow-no-sex```
-It will only take the first column of phenotypic data (Dmg_Rating)In R:
+
+
+It will only take the first column of phenotypic data.To add another column in the pheno file that is not the first one, we can use the name of the column: ```
+plink --bfile <data> --pheno pheno.txt –pheno-name <col2> --out <include_phe> --make-bed –recode```In R:
 ```library(qqman)
 c <- read.table("~/plink.qassoc", header = TRUE)
 manhattan(c, cex=0.8, col=c("blue4", "orange3"))```
+### 5. Population structure 
 
+##### 5.1 PCA
+
+```
+plink  --bfile data --pca --out pca
+```
+
+
+
+Run []()
+
+##### 5.2 MDS
+```
+plink --bfile data --cluster --mds-plot 4 –out mds
+```
+
+##### 5.3 Structure
+
+[Lizards-are-awesome](https://github.com/furious-luke/lizards-are-awesome) is a Docker workflow that takes a csv file of DartSeq data and generates a set of plink files and then runs fastStructure to identify populations structure. You'd need to install [Docker](https://docs.docker.com/engine/installation/) 
+
+```
+wget https://github.com/furious-luke/lizards-are-awesome
+pip install lizards-are-awesome
+sudo laa init
+```
+- Run fastStructure for k=2```laa fast <plink file> strout 2
+```- Run fastStructore from k=1 to k=10
+```for k in {1..10}do	echo "Running fastStructure with k = $k"	laa fast <plink file> strout $kdone 
+```
+- Tell fastStructure to find the most probably value of k
+```laa choosek eucalypt eucalypt.out --maxk=7
+```
+
+##### 5.3 Tree 
+
+```
+plink --bfile data --distance square --out tree
+```
+
+##### 5.4 Fst
+
+```
+plink --file data --fst --within within.txt --out temp 
+```
+
+To perform pairwise comparisons between all the populations, run [runFst.sh](runFst.sh). Before running, edit the name of the input plink file and the populations
+
+1. Change name of the input plink file 
+
+	```
+	data="plink.clean"
+	```
+2. Add names of populations for output 
+
+	```
+	output=$'id\pop1\pop2\pop3\pop4\n'
+	```
+	
+3. Add names of populations for first and second one to iterate in loop
+
+	```
+	for first in pop1 pop2 pop3 pop4
+	do
+        output="$output$first"
+        for second in pop1 pop2 pop3 pop4
+	...
+	```
+
+Then, 
+
+```
+sh runFst.sh
+```
