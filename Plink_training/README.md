@@ -44,14 +44,13 @@ manhattan(c, cex=0.8, col=c("blue4", "orange3"))```
 plink  --bfile data --pca --out pca
 ```
 
-
-
-Run []()
+In R, run the PCA part in [pop_structure.R](https://github.com/pilarcormo/Bioinformatics_support_BecA/blob/master/R-scripts/pop_structure.R)
 
 ##### 5.2 MDS
 ```
 plink --bfile data --cluster --mds-plot 4 –out mds
 ```
+In R, run the MDS part in in [pop_structure.R](https://github.com/pilarcormo/Bioinformatics_support_BecA/blob/master/R-scripts/pop_structure.R)
 
 ##### 5.3 Structure
 
@@ -69,12 +68,21 @@ sudo laa init
 - Tell fastStructure to find the most probably value of k
 ```laa choosek eucalypt eucalypt.out --maxk=7
 ```
+Add two columns to the meanQ file with the populations and names of the genotypes. Excel can be used to plot or save as .csv and run [strplot2](http://omicsspeaks.com/strplot2/)
 
 ##### 5.3 Tree 
 
 ```
 plink --bfile data --distance square --out tree
 ```
+
+Add names of genotypes to the output matrix twice (first column and first line). Create a file with the names of the populations and the genoytpes:
+
+```
+awk '{print $1, $2}' <data.ped> > pop_ID.txt 
+```
+
+Then run the tree part in in [pop_structure.R](https://github.com/pilarcormo/Bioinformatics_support_BecA/blob/master/R-scripts/pop_structure.R)
 
 ##### 5.4 Fst
 
@@ -110,3 +118,5 @@ Then,
 ```
 sh runFst.sh
 ```
+
+In R, run in the part about Fst in [pop_structure.R](https://github.com/pilarcormo/Bioinformatics_support_BecA/blob/master/R-scripts/pop_structure.R)

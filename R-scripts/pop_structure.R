@@ -2,7 +2,7 @@
 
 #-----PCA plot from PLINK output
 library(ggplot2)
-pca <- read.table("~/Downloads/plink_mac/pca_wgas2.eigenvec")
+pca <- read.table("pca_wgas2.eigenvec")
 ggplot(pca, aes(x=V3, y=V4, colour=V1)) + geom_point()
 
 #-----Another option for PCA 
@@ -13,9 +13,9 @@ ggplot(pca, aes(x=V3, y=V4, colour=V1)) + geom_point()
 
 library(GWASTools)
 library(SNPRelate)
-bed.fn <- "~/Downloads/plink_mac/wgas2.bed"
-fam.fn <- "~/Downloads/plink_mac/wgas2.fam"
-bim.fn <- "~/Downloads/plink_mac/wgas2.bim"
+bed.fn <- "wgas2.bed"
+fam.fn <- "wgas2.fam"
+bim.fn <- "wgas2.bim"
 gdsfile <- "snps.gds"
 
 snpgdsBED2GDS(bed.fn, fam.fn, bim.fn, gdsfile)
@@ -37,7 +37,7 @@ ggplot(tab, aes(x=EV1, y=EV2, colour=sample.id)) + geom_point()
 
 library(ggplot2)
 
-mds <- read.table("~/Downloads/plink_mac/otp-mds.mds", header = TRUE)
+mds <- read.table("otp-mds.mds", header = TRUE)
 
 #--MDS plot by genotype ID 
 ggplot(mds, aes(x=C1, y=C2, colour=IID)) + geom_point() + theme_bw()
@@ -54,7 +54,7 @@ library(RColorBrewer)
 m <- as.matrix(read.table("tree.dist.txt", head=T, row.names=1))
 
 #2. Create 2 column file with Family (population) ID in the first column and genotype ID in the 2nd column
-names<-read.table("pop_name.txt")
+names<-read.table("pop_ID.txt")
 head(names)
 plot(hclust(dist(m)))
 
