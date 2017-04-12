@@ -1,19 +1,26 @@
 ### 1. Obtain .map and .ped for PLINK 1.9 
 
-1) Fix truncated columns
-
-2) Change genotype names to ID number
-
-3) Remove final rows with no chr or pos information
-
-4) Make 2 columns per genotype in ped file. From AA to A	A 
-
-5) Fix duplicate genotypes names by add .1 to the repeated ones. 
+###### ped file (1st to 6th columns + columns for SNP genotypes):Original standard text format for sample pedigree information and genotype calls. Normally must be accompanied by a .map file. Contains no header line, and one line per sample with 2V+6 fields where V is the number of variants. 
+- 1st column = FID – family ID (this column can be missing (use --no-fid option), or can be all 0, … or can be same as individual ID in population studies)
+- 2nd column = IID – individual ID (IID = 1 if FID are unique ids or same as FID in population-based studies). 
+- 3rd column = PAT – paternal id (both 3rd and 4th columns can be missing (use --no-parents option) or can be set to 0’s for all subjects in population based studies )
+- 4th column = MAT – maternal id (both 3rd and 4th columns can be missing or can be set to 0’s for all subjects in population based studies)
+- 5th column = SEX (this column can be missing if sex is provided in separate file (use --no-sex option) or 1 = male, 2 female, any other = missing)
+- 6th column = PHENOTYPE (this column can be missing if main phenotype of interest is provided in separate file (use --no-pheno option), or 1=unaffected or control, 2 = affected or case for binary phenotype variable as in population based case-control studies; in such study, continuous phenotypes are provided in separate file.)
+- 7th – last columns = genotyping data for each SNP (two columns one for each allele is presented (eg, A and G, or 1 and 2) for each SNP; if compound genotypes are presented (eg, AG) in a single column for each SNP, each base needs to be in a separate column (A G)
+See [how to create a ped file](https://github.com/pilarcormo/Bioinformatics_support_BecA/blob/master/Plink_training/Plink_input/make_ped.md)######  map file (only 4 columns):A text file with no header file, and one line per variant with the following 3-4 fields:
+- 1st column = Chromosome code. PLINK 1.9 also permits contig names here, but most older programs do not. Can be set to all 1’s if information is not available
+- 2nd column = Variant identifier. SNP names (eg, rs123456 or SNP1, SNP2)
+- 3rd column = Position in morgans or centimorgans (optional; also safe to use dummy value of '0')
+- 4th column = Base-pair coordinate: physical position of marker SNP in each chromosome (can be positive integers: 1,2, 3…N, if information is not available)
 
 
 ### 2. Create phenotype file
 
-- Include phenotype : FID has to match between external phenotype file and ped file (0 for all of them works)
+**Important**: make sure that your phenotype file has information for all the genoytpes included in the .ped file. In other words, they need to have the same number of columns - 1st column = FID. It has to much with the ped file. 0 for all works.
+- 2nd column = IID
+- 3rd – last columns = variables for phenotypes (eg, blood pressure, bmi, age)
+
 
 
 ### 3. Filtering 
