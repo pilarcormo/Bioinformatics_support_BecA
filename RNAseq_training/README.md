@@ -146,7 +146,7 @@ The output will be found in the output folder previously specified and created (
 - ``Read group tracking files`` - Cuffdiff calculates the expression and fragment count for each transcript, primary transcript, and gene in each replicate. 
 - ``Differential expression tests`` -  tab delimited file lists the results of differential expression testing between samples 
 
-More information about cuffdiff output files can be found [here](http://cole-trapnell-lab.github.io/cufflinks/cuffdiff/#cuffdiff-output-files)
+More information about cuffdiff output files can be found [here](http://cole-trapnell-lab.github.io/cufflinks/cuffdiff/#cuffdiff-output-files). [CummeRbund](https://github.com/pilarcormo/Bioinformatics_support_BecA/blob/master/R-scripts/cummeRbund.R) can be used to look at the differentially expressed genes in R. 
 
 ### HtSeq
 
@@ -181,3 +181,16 @@ where <1> and <2> are the names of the samples in the columns
 3. After using join, the fields are separated by spaces and not by tabs, so we have to replace spaces by tabs using:
 
 ```tr ' ' '\t' < merge_htseq.txt > merge_htseq_tab.txt```
+
+[DESeq2](https://github.com/pilarcormo/Bioinformatics_support_BecA/blob/master/R-scripts/deseq2_zebrafish.R) can be then used to look at differentially expressed genes in R 
+
+### Kallisto 
+
+Kallisto can be used to quantify the  transcript abundances in the RNA-seq samples. Kallisto performs a pseudoalignment using the reference transcriptome to determine the compatibility of reads with target transcripts.
+
+```
+kallisto index -i ref.idx reference.fasta
+kallisto quant -i ref.idx -o kallisto_output -b 100 R1.fastq R2.fastq
+```
+
+[Sleuth](https://github.com/pilarcormo/Bioinformatics_support_BecA/blob/master/R-scripts/sleuth.R) can be then used to look at differentially expressed genes in R
